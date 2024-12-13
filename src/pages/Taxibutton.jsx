@@ -9,10 +9,10 @@ function Taxibutton() {
                 <h2 className='text-lg font-bold'>Book a taxi here</h2>
             </header>
             <div className='flex flex-wrap gap-5 justify-start'>
-                <button className='h-24 w-24 rounded-full flex items-center justify-center overflow-hidden border border-gray-300 hover:shadow-lg transition-shadow duration-200'>
+                <button className='h-20 w-20 rounded-full flex items-center justify-center overflow-hidden border border-gray-300 hover:shadow-lg transition-shadow duration-200'>
                     <img src={bike} alt="Taxi bike" className='h-full w-full object-cover' />
                 </button>
-                <button className='h-24 w-24 rounded-full flex items-center justify-center overflow-hidden border border-gray-300 hover:shadow-lg transition-shadow duration-200'>
+                <button className='h-20 w-20 rounded-full flex items-center justify-center overflow-hidden border border-gray-300 hover:shadow-lg transition-shadow duration-200'>
                     <img src={car} alt="Taxi car" className='h-full w-full object-cover' />
                 </button>
             </div>

@@ -3,7 +3,7 @@ import Homelandingpage from './Homelandingpage';
 
 function Landingpage() {
   return (
-    <div className='bg-slate-200 h-full w-screen'>
+    <div className='bg-blue-400 h-[1130px] w-screen rounded-br-[150px]'>
         <Homelandingpage />
     </div>
   )

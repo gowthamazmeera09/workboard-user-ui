@@ -28,7 +28,7 @@ function Listofworks() {
     const itemsToShow = showAll ? workers.length : 6; // Show only two rows (6 items) initially
 
     return (
-        <div className='bg-white m-1 rounded-lg p-3 items-center shadow-md'>
+        <div className='bg-white  rounded-lg p-3 items-center shadow-md'>
             <header className='flex items-center justify-left mb-3'>
                 <h2 className='text-lg font-bold'>Explore workers here</h2>
             </header>
@@ -36,7 +36,7 @@ function Listofworks() {
                 <div className='grid grid-cols-3 gap-4 lg:grid-cols-9'>
                     {workers.slice(0, itemsToShow).map((worker, index) => (
                         <div key={index} className="flex flex-col items-center">
-                        <img src={worker.img} width="200px" alt={worker.title} className="rounded-lg shadow-md" />
+                        <img src={worker.img} width="80px" alt={worker.title} className="rounded-full shadow-md" />
                         <h3 className="mt-2 text-lg font-semibold text-gray-700 hover:text-blue-500 transition duration-300">
                             {worker.title}
                         </h3>

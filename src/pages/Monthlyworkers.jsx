@@ -17,7 +17,7 @@ function Monthlyworkers() {
     const itemsToShow = showAll ? workers.length : 6; // Show only two rows (6 items) initially
 
     return (
-        <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 m-4 rounded-lg p-6 shadow-lg">
+        <div className="bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 m-7 rounded-lg p-6 shadow-lg mt-10">
             <header className="flex items-center justify-left mb-5">
                 <h2 className="text-2xl font-bold text-gray-800">Monthly Salary Workers</h2>
             </header>
