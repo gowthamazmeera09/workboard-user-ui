@@ -3,7 +3,7 @@ import { FaBell, FaHeadset } from 'react-icons/fa';
 
 function Upperbar() {
   return (
-    <div className="bg-slate-50 text-black shadow-md py-4">
+    <div className="bg-slate-100 text-black shadow-md py-4">
       <div className="container mx-auto flex items-center justify-between px-4">
         {/* Logo/Title */}
         <h2 className="text-2xl font-bold">WorkBoard</h2>

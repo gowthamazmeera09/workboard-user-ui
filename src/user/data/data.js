@@ -1,0 +1,1 @@
+export const API_URL = "https://workboard-backend.onrender.com/user/all-users"
