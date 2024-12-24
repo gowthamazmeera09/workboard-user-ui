@@ -27,15 +27,20 @@ function Home() {
         <Carousel />
       </div>
       {/* Home page upper images */}
-      <div className='grid grid-cols-4 gap-10 m-5'>
-        {roles.map((role) => (
-          <Link key={role.name} to={`/users/${role.name}`}>
-            <div className='image-card'>
-              <img src={role.image} alt={role.name} width="40px" className="rounded-full" />
-              <p className='text-xs'>{role.name}</p>
-            </div>
-          </Link>
-        ))}
+      <div>
+        <div className='ml-3 mt-5'>
+          <h1 className='text-md font-serif font-bold'>Explore Workers</h1>
+        </div>
+        <div className='grid grid-cols-4 gap-10 m-5'>
+          {roles.map((role) => (
+            <Link key={role.name} to={`/users/${role.name}`}>
+              <div className='image-card'>
+                <img src={role.image} alt={role.name} width="40px" className="rounded-full" />
+                <p className='text-xs'>{role.name}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
     </div>
   );
