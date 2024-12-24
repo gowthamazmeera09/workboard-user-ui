@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import Home from './user/pages/Home';
 import Profile from './user/pages/Profile';
-import UsersPage from './user/pages/UsersPage';
+import UsersList from './user/pages/UsersList';
 
 var router = createBrowserRouter([
   {
@@ -25,8 +25,8 @@ var router = createBrowserRouter([
         element:<Profile />
       },
       {
-        path:"/users",
-        element:<UsersPage />
+        path:"/users/:role",
+        element:<UsersList />
       }
     ]
   }
