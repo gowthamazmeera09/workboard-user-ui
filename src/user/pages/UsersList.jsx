@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { haversineDistance } from './Utils'; // Import your haversine function
+import { FaPhone, FaEnvelope, FaWhatsapp } from 'react-icons/fa'; // Import icons
 
 const API_URL = "https://workboard-backend.onrender.com/user/all-users";
 
@@ -59,8 +60,33 @@ const UsersList = () => {
                 />
                 <div>
                   <h3 className="text-lg font-bold text-white">{user.username}</h3>
-                  <p className="text-sm text-white">{user.email}</p>
-                  <p className="text-sm text-white">{user.phonenumber}</p>
+                  {/* Replace phone number and email with icons */}
+                  <div className="flex items-center space-x-2 text-white mt-2">
+                    <a
+                      href={`tel:${user.phonenumber}`}
+                      className="flex items-center space-x-1 cursor-pointer"
+                      target="_blank" rel="noopener noreferrer"
+                    >
+                      <FaPhone />
+                      <span>Call</span>
+                    </a>
+                    <a
+                      href={`mailto:${user.email}`}
+                      className="flex items-center space-x-1 cursor-pointer"
+                      target="_blank" rel="noopener noreferrer"
+                    >
+                      <FaEnvelope />
+                      <span>Email</span>
+                    </a>
+                    <a
+                      href={`https://wa.me/${user.phonenumber}`}
+                      className="flex items-center space-x-1 cursor-pointer"
+                      target="_blank" rel="noopener noreferrer"
+                    >
+                      <FaWhatsapp />
+                      <span>WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
               </div>
 
@@ -110,4 +136,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default UsersList; 
