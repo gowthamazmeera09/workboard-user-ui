@@ -10,6 +10,7 @@ const UsersList = () => {
   const [users, setUsers] = useState([]); // State to store fetched users
   const [filteredUsers, setFilteredUsers] = useState([]); // Filtered users state
   const [selectedImage, setSelectedImage] = useState(null); // State to track the selected image
+  const userLocation = [80.8567972, 17.6950348]; // Replace with actual user location coordinates
   const radius = 15; // Radius in km
 
   useEffect(() => {
@@ -22,14 +23,13 @@ const UsersList = () => {
   }, []);
 
   useEffect(() => {
-    // Assuming userLocation is defined and available globally
-    const userLocation = [80.8567996, 17.6950414]; // Example user location
+    // Filter users based on the role and distance
     const filtered = users.filter((user) => {
       const distance = haversineDistance(user.location.coordinates, userLocation); // Calculate distance
       return distance <= radius && user.addwork.some((work) => work.role === role); // Check distance and role match
     });
     setFilteredUsers(filtered); // Set filtered users
-  }, [users, role]); // Dependencies: users, role
+  }, [users, userLocation, role]); // Dependencies: users, userLocation, role
 
   // Handle image click to open in modal
   const handleImageClick = (image) => {
@@ -136,4 +136,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList;
+export default UsersList; 
