@@ -79,6 +79,7 @@ const UsersList = () => {
                       <span>Email</span>
                     </a>
                     <a
+                      href={`https://wa.me/${user.phonenumber}`}
                       href={`https://wa.me/+91${user.phonenumber}`}
                       className="flex items-center space-x-1 cursor-pointer"
                       target="_blank" rel="noopener noreferrer"
