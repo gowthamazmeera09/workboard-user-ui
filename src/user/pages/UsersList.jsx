@@ -9,9 +9,23 @@ const UsersList = () => {
   const { role } = useParams(); // Extract the role from URL
   const [users, setUsers] = useState([]); // State to store fetched users
   const [filteredUsers, setFilteredUsers] = useState([]); // Filtered users state
+  const [userLocation, setUserLocation] = useState(null); // User's dynamic location
   const [selectedImage, setSelectedImage] = useState(null); // State to track the selected image
-  const userLocation = [80.8567972, 17.6950348]; // Replace with actual user location coordinates
+  const [error, setError] = useState(null); // Location error state
   const radius = 15; // Radius in km
+
+  useEffect(() => {
+    // Fetch user's current location
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        setUserLocation([longitude, latitude]);
+      },
+      (err) => {
+        setError("Unable to fetch your location. Please enable location services.");
+      }
+    );
+  }, []);
 
   useEffect(() => {
     // Fetch all users from API
@@ -23,6 +37,8 @@ const UsersList = () => {
   }, []);
 
   useEffect(() => {
+    if (!userLocation) return; // Wait until user location is available
+
     // Filter users based on the role and distance
     const filtered = users.filter((user) => {
       const distance = haversineDistance(user.location.coordinates, userLocation); // Calculate distance
@@ -44,8 +60,12 @@ const UsersList = () => {
   return (
     <div className="container mx-auto p-4 mb-20">
       <h2 className="text-2xl font-bold mb-4">Workers for role: {role}</h2>
+      {error && <p className="text-red-500">{error}</p>} 
+      {!userLocation && !error && (
+        <p className="text-gray-500">Fetching your location...</p> 
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {filteredUsers.length > 0 ? (
+        {userLocation && filteredUsers.length > 0 ? (
           filteredUsers.map((user) => (
             <div
               key={user._id}
@@ -60,12 +80,12 @@ const UsersList = () => {
                 />
                 <div>
                   <h3 className="text-lg font-bold text-white">{user.username}</h3>
-                  {/* Replace phone number and email with icons */}
                   <div className="flex items-center space-x-2 text-white mt-2">
                     <a
                       href={`tel:${user.phonenumber}`}
                       className="flex items-center space-x-1 cursor-pointer"
-                      target="_blank" rel="noopener noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <FaPhone />
                       <span>Call</span>
@@ -73,16 +93,17 @@ const UsersList = () => {
                     <a
                       href={`mailto:${user.email}`}
                       className="flex items-center space-x-1 cursor-pointer"
-                      target="_blank" rel="noopener noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <FaEnvelope />
                       <span>Email</span>
                     </a>
                     <a
-                      href={`https://wa.me/${user.phonenumber}`}
                       href={`https://wa.me/+91${user.phonenumber}`}
                       className="flex items-center space-x-1 cursor-pointer"
-                      target="_blank" rel="noopener noreferrer"
+                      target="_blank"
+                      rel="noopener noreferrer"
                     >
                       <FaWhatsapp />
                       <span>WhatsApp</span>
@@ -90,7 +111,6 @@ const UsersList = () => {
                   </div>
                 </div>
               </div>
-
               <h4 className="text-md font-semibold text-white mt-4">Works:</h4>
               {user.addwork
                 .filter((work) => work.role === role)
@@ -137,4 +157,4 @@ const UsersList = () => {
   );
 };
 
-export default UsersList; 
+export default UsersList;
