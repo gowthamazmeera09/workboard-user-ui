@@ -60,7 +60,7 @@ const UsersList = () => {
   return (
     <div className="container mx-auto p-4 mb-20">
       <h2 className="text-2xl font-bold mb-4">Workers for role: {role}</h2>
-      {error && <p className="text-red-500">{error}</p>} 
+      {error && <p className="text-red-500">{error}</p>} {/* Show error if location fetch fails */}
       {!userLocation && !error && (
         <p className="text-gray-500">Fetching your location...</p> 
       )}

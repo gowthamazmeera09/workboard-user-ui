@@ -10,6 +10,7 @@ import {
 import Home from './user/pages/Home';
 import Profile from './user/pages/Profile';
 import UsersList from './user/pages/UsersList';
+import Help from './user/pages/Help';
 
 var router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ var router = createBrowserRouter([
       {
         path:"/users/:role",
         element:<UsersList />
+      },
+      {
+        path:"/Help",
+        element:<Help />
       }
     ]
   }
