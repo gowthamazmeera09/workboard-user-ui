@@ -9,11 +9,6 @@ function MonthlyWorkers() {
     { name: 'Watchman', image: watchman },
     { name: 'Driver', image: driver },
     { name: 'Teacher', image: teacher },
-    { name: 'Security', image: watchman },
-    { name: 'Chauffeur', image: driver },
-    { name: 'Educator', image: teacher },
-    { name: 'Guard', image: watchman },
-    { name: 'Driver Pro', image: driver },
   ];
 
   const [visibleRoles, setVisibleRoles] = useState(6);

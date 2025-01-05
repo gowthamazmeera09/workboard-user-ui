@@ -9,6 +9,21 @@ import carpenter from '../images/carpenter.jpeg';
 import welder from '../images/welder.jpeg';
 import Carousel from './Carousel';
 import MonthlyWorkers from './MonthlyWorkers';
+import aglabour from '../images/agricultural labour.jpg';
+import automechanic from '../images/auto mechanic.jpg';
+import bikemechanic from '../images/bike mechanic.jpg';
+import carmechanic from '../images/car mechanic.jpg';
+import carwash from '../images/car washer.jpg';
+import chief from '../images/chief.jpg';
+import cloths from '../images/cloths washer.jpg';
+import garden from '../images/garden cleaner.jpg';
+import glass from '../images/glass cleaner.jpg';
+import kids from '../images/kids care taker.jpg';
+import old from '../images/old people caretaker.jpg';
+import makeup from '../images/make up artest 2.jpg';
+import photographer from '../images/photographer for shoots and wedding.jpg';
+import cattering from '../images/waiter or catering .jpg';
+import dishes from '../images/washing dishes.jpg';
 
 function Home() {
   const roles = [
@@ -19,13 +34,21 @@ function Home() {
     { name: 'electrician', image: electrician },
     { name: 'carpenter', image: carpenter },
     { name: 'welder', image: welder },
-    { name: 'mason', image: mason },
-    { name: 'marbul mason', image: marbul },
-    { name: 'painter', image: painter },
-    { name: 'plumber', image: plumber },
-    { name: 'electrician', image: electrician },
-    { name: 'carpenter', image: carpenter },
-    { name: 'welder', image: welder },
+    { name: 'Agricultural labour', image: aglabour },
+    { name: 'Autom echanic', image: automechanic },
+    { name: 'Bike mechanic', image: bikemechanic },
+    { name: 'Car mechanic', image: carmechanic },
+    { name: 'Car wash', image: carwash },
+    { name: 'Chief', image: chief },
+    { name: 'washing cloths', image: cloths },
+    { name: 'Garden cleaner', image: garden },
+    { name: 'Glass cleaner', image: glass },
+    { name: 'Kids caretaker', image: kids },
+    { name: 'Old people caretaker', image: old },
+    { name: 'Photographer', image: photographer },
+    { name: 'Makeup artest', image: makeup },
+    { name: 'Cattering boy/girls, or waiter', image: cattering  },
+    { name: 'Dish washer', image: dishes },
   ];
 
   const [visibleRoles, setVisibleRoles] = useState(8);
