@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import mason from '../images/ui mason.jpg';
-import painter from '../images/ui painter.jpg';
-import plumber from  '../images/ui plumber.jpg';
-import carpenter from '../images/ui carpenter.jpg';
-import marbul from '../images/marbul mason.jpeg';
-import electrician from '../images/ui electrician.jpg';
-import teacher from '../images/ui teacher.jpg';
-import ac from '../images/ui AcTech.jpg';
-import lift from '../images/ui liftTech.jpg';
-import driver from '../images/ui driver.jpg';
-import welder from '../images/ui welder.jpg';
-import watchman from '../images/ui watchman.jpg';
+import mason from '../images/uimason.jpg';
+import painter from '../images/uipainter.jpg';
+import plumber from  '../images/uiplumber.jpg';
+import carpenter from '../images/uicarpenter.jpg';
+import marbul from '../images/marbulmason.jpeg';
+import electrician from '../images/uielectrician.jpg';
+import teacher from '../images/uiteacher.jpg';
+import ac from '../images/uiAcTech.jpg';
+import lift from '../images/uiliftTech.jpg';
+import driver from '../images/uidriver.jpg';
+import welder from '../images/uiwelder.jpg';
+import watchman from '../images/uiwatchman.jpg';
 
 
 function Carousel() {
