@@ -1,20 +1,24 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import watchman from '../images/watchmen.jpeg';
-import driver from '../images/driver.jpeg';
-import teacher from '../images/teacher.jpeg';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import watchman from "../images/watchmen.jpeg";
+import driver from "../images/driver.jpeg";
+import teacher from "../images/teacher.jpeg";
+import kids from '../images/kidscaretaker.jpg';
+import old from '../images/oldpeoplecaretaker.jpg';
 
 function MonthlyWorkers() {
   const roles = [
-    { name: 'Watchman', image: watchman },
-    { name: 'Driver', image: driver },
-    { name: 'Teacher', image: teacher },
+    { name: "watchman", image: watchman },
+    { name: "driver", image: driver },
+    { name: "teacher", image: teacher },
+    { name: 'kidscaretaker', image: kids },
+    { name: 'oldpeoplecaretaker', image: old },
   ];
 
-  const [visibleRoles, setVisibleRoles] = useState(6);
+  const [visibleRoles, setVisibleRoles] = useState(4);
 
   const showMore = () => {
-    setVisibleRoles((prev) => prev + 6);
+    setVisibleRoles((prev) => prev + 4);
   };
 
   return (
@@ -29,7 +33,7 @@ function MonthlyWorkers() {
             <div className="bg-white shadow-md rounded-lg overflow-hidden">
               <img src={role.image} alt={role.name} className="w-full h-40 object-cover" />
               <div className="p-3">
-                <p className="text-center text-gray-700 font-medium">{role.name}</p>
+                <p className="text-center text-gray-700 font-medium capitalize">{role.name}</p>
               </div>
             </div>
           </Link>
