@@ -62,7 +62,7 @@ const UsersList = () => {
       <h2 className="text-2xl font-bold mb-4">Workers for role: {role}</h2>
       {error && <p className="text-red-500">{error}</p>} {/* Show error if location fetch fails */}
       {!userLocation && !error && (
-        <p className="text-gray-500">Fetching your location...</p> 
+        <p className="text-gray-500">Fetching your location...</p>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {userLocation && filteredUsers.length > 0 ? (
@@ -116,8 +116,18 @@ const UsersList = () => {
                 .filter((work) => work.role === role)
                 .map((work) => (
                   <div key={work._id}>
-                    <p>
-                      <strong className="text-white">Experience: {work.experience} years</strong>
+                    <p className=" text-white mt-4">
+                      {work.experience && <p><strong>Experience:</strong>{work.experience}</p>}
+                      {work.standard && <p><strong>Standard:</strong>{work.standard}</p>}
+                      {work.subject && <p><strong>Subject:</strong>{work.subject}</p>}
+                      {work.vehicletype && <p><strong>VehicleType:</strong>{work.vehicletype}</p>}
+                      {work.paintertype && <p><strong>Paintertype:</strong>{work.paintertype}</p>}
+                      {work.cartype && <p><strong>Cartype:</strong>{work.cartype}</p>}
+                      {work.biketype && <p><strong>Biketype:</strong>{work.biketype}</p>}
+                      {work.autotype && <p><strong>Autotype:</strong>{work.autotype}</p>}
+                      {work.shoottype && <p><strong>Shoottype</strong>{work.shoottype}</p>}
+                      {work.marbultype && <p><strong>Marbultype:</strong>{work.marbultype}</p>}
+                      {work.weldingtype && <p><strong>Weldingtype:</strong>{work.weldingtype}</p>}
                     </p>
                     <div className="flex space-x-4 overflow-x-auto mt-2">
                       {work.photos.map((photo, index) => (
