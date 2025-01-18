@@ -12,7 +12,7 @@ import MonthlyWorkers from './MonthlyWorkers';
 import aglabour from '../images/agriculturallabour.jpeg';
 import automechanic from '../images/automechanic.jpg';
 import bikemechanic from '../images/bikemechanic.jpg';
-import carmechanic from '../images/carmechanic.jpg';
+import Carmechanic from '../images/carmechanic.jpg';
 import carwash from '../images/carwasher.jpeg';
 import chief from '../images/chief.jpg';
 import cloths from '../images/clothswasher.jpg';
@@ -37,7 +37,7 @@ function Home() {
     { name: 'Agriculturallabour', image: aglabour },
     { name: 'Automechanic', image: automechanic },
     { name: 'Bikemechanic', image: bikemechanic },
-    { name: 'Carmechanic', image: carmechanic },
+    { name: 'Carmechanic', image: Carmechanic },
     { name: 'Carwash', image: carwash },
     { name: 'Chief', image: chief },
     { name: 'washingcloths', image: cloths },
@@ -47,7 +47,7 @@ function Home() {
     { name: 'Oldpeoplecaretaker', image: old },
     { name: 'Photographer', image: photographer },
     { name: 'Makeupartest', image: makeup },
-    { name: 'Cattering boy/girls, or waiter', image: cattering  },
+    { name: 'Cattering', image: cattering  },
     { name: 'Dishwasher', image: dishes },
   ];
 
