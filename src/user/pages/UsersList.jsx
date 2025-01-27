@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { haversineDistance } from './Utils'; // Import your haversine function
-import { FaPhone, FaEnvelope, FaWhatsapp } from 'react-icons/fa'; // Import icons
+import { haversineDistance } from "./Utils";
+import { FaPhone, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 
 const API_URL = "https://workboard-backend.onrender.com/user/all-users";
 
 const UsersList = () => {
-  const { role } = useParams(); // Extract the role from URL
-  const [users, setUsers] = useState([]); // State to store fetched users
-  const [filteredUsers, setFilteredUsers] = useState([]); // Filtered users state
-  const [userLocation, setUserLocation] = useState(null); // User's dynamic location
-  const [selectedImage, setSelectedImage] = useState(null); // State to track the selected image
-  const [error, setError] = useState(null); // Location error state
-  const radius = 15; // Radius in km
+  const { role } = useParams();
+  const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [userLocation, setUserLocation] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [error, setError] = useState(null);
+  const radius = 15;
+
+  // State to track payment status for workers
+  const [paidWorkers, setPaidWorkers] = useState(
+    JSON.parse(localStorage.getItem("paidWorkers")) || {}
+  );
 
   useEffect(() => {
-    // Fetch user's current location
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
@@ -28,39 +32,69 @@ const UsersList = () => {
   }, []);
 
   useEffect(() => {
-    // Fetch all users from API
     fetch(API_URL)
       .then((response) => response.json())
       .then((data) => {
-        setUsers(data.users); // Set fetched users
+        setUsers(data.users);
       });
   }, []);
 
   useEffect(() => {
-    if (!userLocation) return; // Wait until user location is available
+    if (!userLocation) return;
 
-    // Filter users based on the role and distance
     const filtered = users.filter((user) => {
-      const distance = haversineDistance(user.location.coordinates, userLocation); // Calculate distance
-      return distance <= radius && user.addwork.some((work) => work.role === role); // Check distance and role match
+      const distance = haversineDistance(user.location.coordinates, userLocation);
+      return distance <= radius && user.addwork.some((work) => work.role === role);
     });
-    setFilteredUsers(filtered); // Set filtered users
-  }, [users, userLocation, role]); // Dependencies: users, userLocation, role
+    setFilteredUsers(filtered);
+  }, [users, userLocation, role]);
 
-  // Handle image click to open in modal
   const handleImageClick = (image) => {
     setSelectedImage(image);
   };
 
-  // Close the modal
   const closeModal = () => {
     setSelectedImage(null);
+  };
+
+  const handlePayment = (workerId) => {
+    const options = {
+      key: "your_razorpay_key",
+      amount: 100, // ₹1 in paise
+      currency: "INR",
+      name: "Worker Details Payment",
+      description: "Pay ₹1 to view contact details for the day",
+      handler: function (response) {
+        // On successful payment, grant access to the worker's details
+        const updatedPaidWorkers = { ...paidWorkers, [workerId]: Date.now() };
+        setPaidWorkers(updatedPaidWorkers);
+        localStorage.setItem("paidWorkers", JSON.stringify(updatedPaidWorkers));
+        alert("Payment successful! You can now view the worker's contact details.");
+      },
+      prefill: {
+        name: "Your Name",
+        email: "your-email@example.com",
+        contact: "your-phone-number",
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
+  const isPaymentValid = (workerId) => {
+    const paidTime = paidWorkers[workerId];
+    if (!paidTime) return false;
+
+    // Check if the payment is within the last 24 hours
+    const oneDay = 24 * 60 * 60 * 1000;
+    return Date.now() - paidTime < oneDay;
   };
 
   return (
     <div className="container mx-auto p-4 mb-20">
       <h2 className="text-2xl font-bold mb-4">Workers for role: {role}</h2>
-      {error && <p className="text-red-500">{error}</p>} {/* Show error if location fetch fails */}
+      {error && <p className="text-red-500">{error}</p>}
       {!userLocation && !error && (
         <p className="text-gray-500">Fetching your location...</p>
       )}
@@ -80,7 +114,30 @@ const UsersList = () => {
                 />
                 <div>
                   <h3 className="text-lg font-bold text-white">{user.username}</h3>
-                  <div className="flex items-center space-x-2 text-white mt-2">
+                </div>
+              </div>
+              <h4 className="text-md font-semibold text-white mt-4">Works:</h4>
+              {user.addwork
+                .filter((work) => work.role === role)
+                .map((work) => (
+                  <div key={work._id}>
+                    <p className="text-white mt-4">{work.experience}</p>
+                    <div className="flex space-x-4 overflow-x-auto mt-2">
+                      {work.photos.map((photo, index) => (
+                        <img
+                          key={index}
+                          src={photo}
+                          alt={`Work ${work.role} - ${index}`}
+                          className="w-16 h-16 rounded-lg border border-gray-300 cursor-pointer"
+                          onClick={() => handleImageClick(photo)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              <div className="flex items-center space-x-2 text-white mt-4">
+                {isPaymentValid(user._id) ? (
+                  <>
                     <a
                       href={`tel:${user.phonenumber}`}
                       className="flex items-center space-x-1 cursor-pointer"
@@ -108,51 +165,26 @@ const UsersList = () => {
                       <FaWhatsapp />
                       <span>WhatsApp</span>
                     </a>
-                  </div>
-                </div>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => handlePayment(user._id)}
+                    className="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+                  >
+                    Pay ₹1 to View Contact
+                  </button>
+                )}
               </div>
-              <h4 className="text-md font-semibold text-white mt-4">Works:</h4>
-              {user.addwork
-                .filter((work) => work.role === role)
-                .map((work) => (
-                  <div key={work._id}>
-                    <p className=" text-white mt-4">
-                      {work.experience && <p><strong>Experience:</strong>{work.experience}</p>}
-                      {work.standard && <p><strong>Standard:</strong>{work.standard}</p>}
-                      {work.subject && <p><strong>Subject:</strong>{work.subject}</p>}
-                      {work.vehicletype && <p><strong>VehicleType:</strong>{work.vehicletype}</p>}
-                      {work.paintertype && <p><strong>Paintertype:</strong>{work.paintertype}</p>}
-                      {work.cartype && <p><strong>Cartype:</strong>{work.cartype}</p>}
-                      {work.biketype && <p><strong>Biketype:</strong>{work.biketype}</p>}
-                      {work.autotype && <p><strong>Autotype:</strong>{work.autotype}</p>}
-                      {work.shoottype && <p><strong>Shoottype</strong>{work.shoottype}</p>}
-                      {work.marbultype && <p><strong>Marbultype:</strong>{work.marbultype}</p>}
-                      {work.weldingtype && <p><strong>Weldingtype:</strong>{work.weldingtype}</p>}
-                    </p>
-                    <div className="flex space-x-4 overflow-x-auto mt-2">
-                      {work.photos.map((photo, index) => (
-                        <img
-                          key={index}
-                          src={photo}
-                          alt={`Work ${work.role} - ${index}`}
-                          className="w-16 h-16 rounded-lg border border-gray-300 cursor-pointer"
-                          onClick={() => handleImageClick(photo)} // Click handler to open image
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ))}
             </div>
           ))
         ) : (
           <p className="text-gray-500">No users found for this role within the radius.</p>
         )}
       </div>
-
       {selectedImage && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={closeModal} // Close modal on click outside the image
+          onClick={closeModal}
         >
           <div className="bg-white p-4 rounded shadow-lg">
             <img
