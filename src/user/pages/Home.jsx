@@ -9,7 +9,6 @@ import carpenter from '../images/carpenter.jpeg';
 import welder from '../images/welder.jpeg';
 import Carousel from './Carousel';
 import MonthlyWorkers from './MonthlyWorkers';
-import aglabour from '../images/agriculturallabour.jpeg';
 import automechanic from '../images/automechanic.jpg';
 import bikemechanic from '../images/bikemechanic.jpg';
 import Carmechanic from '../images/carmechanic.jpg';
@@ -24,6 +23,7 @@ import makeup from '../images/makeupartest 2.jpg';
 import photographer from '../images/photographer.jpg';
 import cattering from '../images/waiter.jpg';
 import dishes from '../images/washingdishes.jpg';
+import WPpage from './WPpage';
 
 function Home() {
   const roles = [
@@ -34,7 +34,6 @@ function Home() {
     { name: 'electrician', image: electrician },
     { name: 'carpenter', image: carpenter },
     { name: 'welder', image: welder },
-    { name: 'agriculturallabour', image: aglabour },
     { name: 'automechanic', image: automechanic },
     { name: 'bikemechanic', image: bikemechanic },
     { name: 'carmechanic', image: Carmechanic },
@@ -47,7 +46,7 @@ function Home() {
     { name: 'oldpeoplecaretaker', image: old },
     { name: 'photographer', image: photographer },
     { name: 'makeupartest', image: makeup },
-    { name: 'cattering', image: cattering  },
+    { name: 'cattering', image: cattering },
     { name: 'dishwasher', image: dishes },
   ];
 
@@ -58,7 +57,7 @@ function Home() {
   };
 
   return (
-    <div>
+    <div className='mb-32'>
       {/* Carousel */}
       <div>
         <Carousel />
@@ -96,6 +95,9 @@ function Home() {
       </div>
       <div>
         <MonthlyWorkers />
+      </div>
+      <div>
+        <WPpage />
       </div>
     </div>
   );

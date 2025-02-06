@@ -22,7 +22,7 @@ function MonthlyWorkers() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="bg-gray-50">
       <div className="text-center py-6">
         <h1 className="text-2xl font-serif font-bold text-gray-800">Monthly Workers</h1>
         <p className="text-sm text-gray-600 mt-1">Find reliable monthly workers for various roles</p>
