@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import mason from '../images/mason.jpeg';
-import marbul from '../images/marbulmason.jpeg';
-import painter from '../images/painter.jpeg';
-import plumber from '../images/plumber.jpeg';
-import electrician from '../images/electrician.jpeg';
-import carpenter from '../images/carpenter.jpeg';
-import welder from '../images/welder.jpeg';
+import mason from '../images/uimason.jpg';
+// import marbul from '../images/marbulmason.jpeg';
+import painter from '../images/uipainter.jpg';
+import plumber from '../images/uiplumber.jpg';
+import electrician from '../images/uielectrician.jpg';
+import carpenter from '../images/uicarpenter.jpg';
+import welder from '../images/uiwelder.jpg';
 import Carousel from './Carousel';
 import MonthlyWorkers from './MonthlyWorkers';
 import automechanic from '../images/automechanic.jpg';
@@ -28,7 +28,7 @@ import WPpage from './WPpage';
 function Home() {
   const roles = [
     { name: 'mason', image: mason },
-    { name: 'marbulmason', image: marbul },
+    // { name: 'marbulmason', image: marbul },
     { name: 'painter', image: painter },
     { name: 'plumber', image: plumber },
     { name: 'electrician', image: electrician },
@@ -63,10 +63,11 @@ function Home() {
         <Carousel />
       </div>
       {/* Home page upper images */}
-      <div>
-        <div className="ml-3 mt-5">
-          <h1 className="text-md font-serif font-bold">Explore Workers</h1>
-        </div>
+      <div className='lg:ml-24'>
+      <div className="text-center py-6">
+        <h1 className="text-2xl font-serif font-bold text-gray-800">Explore Works</h1>
+        <p className="text-sm text-gray-600 mt-1">Find reliable monthly workers for various roles</p>
+      </div>
         <div className="grid grid-cols-4 gap-10 m-5">
           {roles.slice(0, visibleRoles).map((role, index) => (
             <Link key={index} to={`/users/${role.name}`}>
@@ -74,7 +75,7 @@ function Home() {
                 <img
                   src={role.image}
                   alt={role.name}
-                  width="40px"
+                  width="130px"
                   className="rounded-full"
                 />
                 <p className="text-xs">{role.name}</p>
