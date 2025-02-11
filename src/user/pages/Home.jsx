@@ -13,7 +13,7 @@ import automechanic from '../images/automechanic.jpg';
 import bikemechanic from '../images/bikemechanic.jpg';
 import Carmechanic from '../images/carmechanic.jpg';
 import carwash from '../images/carwasher.jpeg';
-import chief from '../images/chief.jpg';
+import chef from '../images/chief.jpg';
 import cloths from '../images/clothswasher.jpg';
 import garden from '../images/gardencleaner.jpg';
 import glass from '../images/glasscleaner.jpg';
@@ -38,9 +38,9 @@ function Home() {
     { name: 'bikemechanic', image: bikemechanic },
     { name: 'carmechanic', image: Carmechanic },
     { name: 'carwash', image: carwash },
-    { name: 'chief', image: chief },
-    { name: 'washingcloths', image: cloths },
-    { name: 'gardencleaner', image: garden },
+    { name: 'chef', image: chef },
+    { name: 'Dhobi', image: cloths },
+    { name: 'gardener', image: garden },
     { name: 'glasscleaner', image: glass },
     { name: 'kidscaretaker', image: kids },
     { name: 'oldpeoplecaretaker', image: old },
