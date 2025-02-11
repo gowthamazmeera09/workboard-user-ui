@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import mason from '../images/uimason.jpg';
-// import marbul from '../images/marbulmason.jpeg';
 import painter from '../images/uipainter.jpg';
 import plumber from '../images/uiplumber.jpg';
 import electrician from '../images/uielectrician.jpg';
@@ -28,7 +27,6 @@ import WPpage from './WPpage';
 function Home() {
   const roles = [
     { name: 'mason', image: mason },
-    // { name: 'marbulmason', image: marbul },
     { name: 'painter', image: painter },
     { name: 'plumber', image: plumber },
     { name: 'electrician', image: electrician },
@@ -57,47 +55,56 @@ function Home() {
   };
 
   return (
-    <div className='mb-32'>
+    <div className="mb-32">
       {/* Carousel */}
-      <div>
+      <div className="mb-12">
         <Carousel />
       </div>
+
       {/* Home page upper images */}
-      <div className='lg:ml-24'>
-      <div className="text-center py-6">
-        <h1 className="text-2xl font-serif font-bold text-gray-800">Explore Works</h1>
-        <p className="text-sm text-gray-600 mt-1">Find reliable monthly workers for various roles</p>
-      </div>
-        <div className="grid grid-cols-4 gap-10 m-5">
+      <div className="lg:ml-24">
+        <div className="text-center py-8">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Explore Reliable Work Opportunities</h1>
+          <p className="text-md text-gray-500">Browse through various roles and hire trusted monthly workers for your needs</p>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 px-4 py-8">
           {roles.slice(0, visibleRoles).map((role, index) => (
-            <Link key={index} to={`/users/${role.name}`}>
-              <div className="image-card">
+            <Link key={index} to={`/users/${role.name}`} className="group">
+              <div className="relative rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-all transform group-hover:scale-105">
                 <img
                   src={role.image}
                   alt={role.name}
-                  width="130px"
-                  className="rounded-full"
+                  className="w-full h-40 object-cover group-hover:opacity-90"
                 />
-                <p className="text-xs">{role.name}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent opacity-50 group-hover:opacity-70"></div>
+                <div className="absolute bottom-4 left-4 right-4 text-white text-lg font-semibold group-hover:text-yellow-300">
+                  {role.name}
+                </div>
               </div>
             </Link>
           ))}
         </div>
+
         {visibleRoles < roles.length && (
-          <div className="text-center mt-4">
+          <div className="text-center mt-8">
             <button
               onClick={showMore}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-md hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 transition-all"
             >
               Show More
             </button>
           </div>
         )}
       </div>
-      <div>
+
+      {/* Monthly Workers */}
+      <div className="mt-16">
         <MonthlyWorkers />
       </div>
-      <div>
+
+      {/* WP Page */}
+      <div className="mt-16">
         <WPpage />
       </div>
     </div>

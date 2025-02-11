@@ -22,18 +22,18 @@ function MonthlyWorkers() {
   };
 
   return (
-    <div className="bg-gray-50">
+    <div className="bg-gray-50 py-10">
       <div className="text-center py-6">
-        <h1 className="text-2xl font-serif font-bold text-gray-800">Monthly Workers</h1>
-        <p className="text-sm text-gray-600 mt-1">Find reliable monthly workers for various roles</p>
+        <h1 className="text-3xl font-serif font-extrabold text-gray-800 mb-2">Monthly Workers</h1>
+        <p className="text-lg text-gray-600 mt-2 max-w-lg mx-auto">Find reliable monthly workers for various roles that best suit your needs.</p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-5">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-6 lg:px-16">
         {roles.slice(0, visibleRoles).map((role, index) => (
-          <Link key={index} to={`/users/${role.name}`} className="hover:scale-105 transform transition-all duration-300">
-            <div className="bg-white shadow-md rounded-lg overflow-hidden">
-              <img src={role.image} alt={role.name} className="w-full h-40 object-cover" />
-              <div className="p-3">
-                <p className="text-center text-gray-700 font-medium capitalize">{role.name}</p>
+          <Link key={index} to={`/users/${role.name}`} className="transform hover:scale-105 transition-all duration-300">
+            <div className="bg-white shadow-xl rounded-xl overflow-hidden transition-transform transform hover:scale-105">
+              <img src={role.image} alt={role.name} className="w-full h-48 object-cover rounded-t-xl" />
+              <div className="p-4">
+                <p className="text-center text-gray-800 font-semibold capitalize text-lg">{role.name.replace(/([A-Z])/g, ' $1').toLowerCase()}</p>
               </div>
             </div>
           </Link>
@@ -43,7 +43,7 @@ function MonthlyWorkers() {
         <div className="text-center my-6">
           <button
             onClick={showMore}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all"
+            className="px-8 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-all text-xl"
           >
             Show More
           </button>
