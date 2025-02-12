@@ -140,6 +140,13 @@ const UsersList = () => {
                       {work.standard && <p><strong>Standard:</strong> {work.standard}</p>}
                       {work.subject && <p><strong>Subject:</strong> {work.subject}</p>}
                       {work.vehicletype && <p><strong>Vehicle Type:</strong> {work.vehicletype}</p>}
+                      {work.paintertype && <p><strong>Paintertype:</strong>{work.paintertype}</p>}
+                      {work.cartype && <p><strong>Cartype:</strong>{work.cartype}</p>}
+                      {work.biketype && <p><strong>Biketype:</strong>{work.biketype}</p>}
+                      {work.autotype && <p><strong>Autotype:</strong>{work.autotype}</p>}
+                      {work.shoottype && <p><strong>Shoottype</strong>{work.shoottype}</p>}
+                      {work.marbultype && <p><strong>Marbultype:</strong>{work.marbultype}</p>}
+                      {work.weldingtype && <p><strong>Weldingtype:</strong>{work.weldingtype}</p>}
                     </p>
                     <div className="flex space-x-4 overflow-x-auto mt-2">
                       {work.photos.map((photo, index) => (
