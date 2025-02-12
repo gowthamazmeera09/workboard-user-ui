@@ -64,8 +64,8 @@ function Home() {
       {/* Home page upper images */}
       <div className="lg:ml-24">
         <div className="text-center py-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Explore Reliable Work Opportunities</h1>
-          <p className="text-md text-gray-500">Browse through various roles and hire trusted monthly workers for your needs</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Explore Workers</h1>
+          <p className="text-md text-gray-500">Browse through various roles and hire trusted daily and monthly workers for your needs</p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-8 px-4 py-8">
