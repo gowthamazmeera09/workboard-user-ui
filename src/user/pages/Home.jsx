@@ -22,7 +22,7 @@ import makeup from '../images/makeupartest 2.jpg';
 import photographer from '../images/photographer.jpg';
 import cattering from '../images/waiter.jpg';
 import dishes from '../images/washingdishes.jpg';
-// import WPpage from './WPpage';
+import WPpage from './WPpage';
 
 function Home() {
   const roles = [
@@ -103,10 +103,10 @@ function Home() {
         <MonthlyWorkers />
       </div>
 
-      {/* WP Page
+      {/* WP Page */}
       <div className="mt-16">
         <WPpage />
-      </div> */}
+      </div>
     </div>
   );
 }
