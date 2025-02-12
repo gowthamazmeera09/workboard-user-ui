@@ -57,7 +57,7 @@ const UsersList = () => {
 
   const handlePayment = (userId) => {
     const razorpay = new window.Razorpay({
-      key: "rzp_test_Nb0gOzXAGRmzdl", // Replace with your Razorpay API Key
+      key: "rzp_live_OqzosWrCVboRcu", // Replace with your Razorpay API Key
       amount: 100, // ₹1 (100 paise)
       currency: "INR",
       name: "WorkBoard",
