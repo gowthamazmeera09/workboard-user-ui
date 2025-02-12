@@ -13,7 +13,7 @@ function WPpage() {
                 <div className="flex justify-center">
                     <a 
                         href="https://workboard-frontend.vercel.app/"
-                        className="inline-block px-8 py-4 text-lg font-semibold text-white bg-blue-600 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-300 transition duration-200 transform hover:scale-105">
+                        className="px-8 py-3 bg-gradient-to-r from-gray-950 to-indigo-600 text-white rounded-full shadow-md hover:bg-gradient-to-r hover:from-gray-950 hover:to-indigo-700 transition-all">
                         CLICK HERE
                     </a>
                 </div>

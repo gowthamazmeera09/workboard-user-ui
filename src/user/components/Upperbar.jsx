@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 function Upperbar() {
   return (
-    <div className="bg-gradient-to-r from-indigo-600 to-blue-500 text-white shadow-lg py-4">
+    <div className="bg-gradient-to-r from-gray-950 to-blue-500 text-white shadow-lg py-4">
       <div className="container mx-auto flex items-center justify-between px-6">
         {/* Logo/Title */}
         <h2 className="text-3xl font-extrabold tracking-wide text-white">WorkBoard</h2>

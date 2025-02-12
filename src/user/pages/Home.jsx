@@ -90,7 +90,7 @@ function Home() {
           <div className="text-center mt-8">
             <button
               onClick={showMore}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full shadow-md hover:bg-gradient-to-r hover:from-blue-700 hover:to-indigo-700 transition-all"
+              className="px-8 py-3 bg-gradient-to-r from-gray-950 to-indigo-600 text-white rounded-full shadow-md hover:bg-gradient-to-r hover:from-gray-950 hover:to-indigo-700 transition-all"
             >
               Show More
             </button>

@@ -42,11 +42,11 @@ function MonthlyWorkers() {
       {visibleRoles < roles.length && (
         <div className="text-center my-6">
           <button
-            onClick={showMore}
-            className="px-8 py-3 bg-blue-600 text-white rounded-lg shadow-lg hover:bg-blue-700 transition-all text-xl"
-          >
-            Show More
-          </button>
+              onClick={showMore}
+              className="px-8 py-3 bg-gradient-to-r from-gray-950 to-indigo-600 text-white rounded-full shadow-md hover:bg-gradient-to-r hover:from-gray-950 hover:to-indigo-700 transition-all"
+            >
+              Show More
+            </button>
         </div>
       )}
     </div>
