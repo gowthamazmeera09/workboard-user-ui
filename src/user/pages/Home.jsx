@@ -22,6 +22,7 @@ import makeup from '../images/makeupartest 2.jpg';
 import photographer from '../images/photographer.jpg';
 import cattering from '../images/waiter.jpg';
 import dishes from '../images/washingdishes.jpg';
+import ac from '../images/uiAcTech.jpg';
 import WPpage from './WPpage';
 
 function Home() {
@@ -46,6 +47,7 @@ function Home() {
     { name: 'makeupartest', image: makeup },
     { name: 'cattering', image: cattering },
     { name: 'dishwasher', image: dishes },
+    { name:'AcTech', image:ac }
   ];
 
   const [visibleRoles, setVisibleRoles] = useState(8);
