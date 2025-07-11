@@ -3,8 +3,6 @@ import { useParams } from "react-router-dom";
 import { haversineDistance } from "./Utils";
 import { FaPhone, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import AttendanceBox from "../components/AttendanceBox";
-import DownloadAttendanceButton from "../components/DownloadAttendanceButton";
-
 
 
 const API_URL = "https://workboard-backend.onrender.com/user/all-users";
@@ -131,10 +129,8 @@ const UsersList = () => {
                       {monthlyRoles.includes(role) && (
                         <>
                           <AttendanceBox userId={user._id} />
-                          <DownloadAttendanceButton userId={user._id} />
                         </>
                       )}
-
 
                     </>
                   ) : (
