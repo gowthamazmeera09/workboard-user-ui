@@ -35,6 +35,27 @@ const AttendanceBox = ({ userId }) => {
     setHasMarkedToday(true);
   };
 
+  const handleMonthlyPayment = () => {
+    const razorpay = new window.Razorpay({
+      key: "rzp_live_OqzosWrCVboRcu",
+      amount: 9900, // ₹99 in paise
+      currency: "INR",
+      name: "WorkBoard",
+      description: "Monthly Access for Attendance",
+      handler: function (response) {
+        localStorage.setItem(`monthly_paid_${userId}`, Date.now());
+        window.location.reload();
+      },
+      prefill: {
+        email: "user@example.com",
+        contact: "9876543210",
+      },
+      theme: { color: "#6D28D9" },
+    });
+
+    razorpay.open();
+  };
+
   return (
     <div className="bg-white p-4 mt-4 rounded-md shadow-md">
       <h3 className="text-lg font-bold mb-2">Attendance</h3>
@@ -53,11 +74,17 @@ const AttendanceBox = ({ userId }) => {
       ) : (
         <>
           <p className="text-yellow-600 font-semibold mb-2">
-            Your monthly access expired. Please pay again to mark attendance.
+            Your monthly access expired. Please pay ₹99 again to mark attendance.
           </p>
           <p className="text-gray-700 font-medium mb-2">
             Last Working Days: {lastWorkingDays}
           </p>
+          <button
+            onClick={handleMonthlyPayment}
+            className="bg-yellow-500 text-black px-4 py-2 rounded shadow hover:bg-yellow-600"
+          >
+            Pay ₹99 to Renew Access
+          </button>
         </>
       )}
 
