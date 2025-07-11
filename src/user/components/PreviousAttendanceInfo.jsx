@@ -2,35 +2,35 @@ import React, { useEffect, useState } from "react";
 
 const PreviousAttendanceInfo = ({ userId }) => {
   const [lastWorkingDays, setLastWorkingDays] = useState(0);
+  const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
-    const storedAttendance = JSON.parse(localStorage.getItem(`attendance_${userId}`)) || [];
-    const lastPaymentTime = localStorage.getItem(`monthly_paid_${userId}`);
+    const allAttendance = JSON.parse(localStorage.getItem(`attendance_${userId}`)) || [];
+    const paidAt = parseInt(localStorage.getItem(`monthly_paid_${userId}`), 10);
 
-    if (!lastPaymentTime) return;
+    if (paidAt) {
+      const oneMonth = 30 * 24 * 60 * 60 * 1000;
+      const expired = Date.now() - paidAt > oneMonth;
+      setIsExpired(expired);
 
-    const oneMonth = 30 * 24 * 60 * 60 * 1000;
-    const expiredAt = parseInt(lastPaymentTime);
-    const now = Date.now();
-
-    // Only calculate if the previous payment is expired
-    if (now - expiredAt > oneMonth) {
-      const monthEnd = expiredAt + oneMonth;
-      const count = storedAttendance.filter((dateStr) => {
-        const timestamp = new Date(dateStr).getTime();
-        return timestamp >= expiredAt && timestamp <= monthEnd;
-      }).length;
-
-      setLastWorkingDays(count);
+      if (expired) {
+        // Filter only attendance dates before the expiry
+        const expiryTime = paidAt + oneMonth;
+        const pastWorkingDays = allAttendance.filter(date => {
+          const time = new Date(date).getTime();
+          return time <= expiryTime;
+        });
+        setLastWorkingDays(pastWorkingDays.length);
+      }
     }
   }, [userId]);
 
-  if (lastWorkingDays === 0) return null;
-
   return (
-    <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-3 rounded-md mt-4">
-      <p className="font-semibold">Last Working Days: {lastWorkingDays}</p>
-    </div>
+    isExpired && (
+      <div className="bg-yellow-100 text-yellow-800 px-4 py-2 mb-2 rounded shadow text-sm">
+        <strong>Previous Working Days:</strong> {lastWorkingDays}
+      </div>
+    )
   );
 };
 
