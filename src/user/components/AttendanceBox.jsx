@@ -60,6 +60,23 @@ const AttendanceBox = ({ userId }) => {
     <div className="bg-white p-4 mt-4 rounded-md shadow-md">
       <h3 className="text-lg font-bold mb-2">Attendance</h3>
 
+      {!isPaymentActive && (
+        <>
+          <p className="text-yellow-600 font-semibold mb-2">
+            Your monthly access expired. Please pay ₹99 again to mark attendance.
+          </p>
+          <button
+            onClick={handleMonthlyPayment}
+            className="bg-yellow-500 text-black px-4 py-2 rounded shadow hover:bg-yellow-600 mb-2"
+          >
+            Pay ₹99 to Renew Access
+          </button>
+          <p className="text-gray-700 font-medium mb-4">
+            Last Working Days: {lastWorkingDays}
+          </p>
+        </>
+      )}
+
       {isPaymentActive ? (
         hasMarkedToday ? (
           <p className="text-green-600">Today's attendance is already marked.</p>
@@ -71,22 +88,7 @@ const AttendanceBox = ({ userId }) => {
             Mark Attendance
           </button>
         )
-      ) : (
-        <>
-          <p className="text-yellow-600 font-semibold mb-2">
-            Your monthly access expired. Please pay ₹99 again to mark attendance.
-          </p>
-          <p className="text-gray-700 font-medium mb-2">
-            Last Working Days: {lastWorkingDays}
-          </p>
-          <button
-            onClick={handleMonthlyPayment}
-            className="bg-yellow-500 text-black px-4 py-2 rounded shadow hover:bg-yellow-600"
-          >
-            Pay ₹99 to Renew Access
-          </button>
-        </>
-      )}
+      ) : null}
 
       <div className="mt-3">
         <p className="font-semibold text-gray-700">Marked Days:</p>
