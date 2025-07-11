@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { haversineDistance } from "../utils/Utils";
+import { haversineDistance } from "./Utils";
 import { FaPhone, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import AttendanceBox from "../../components/AttendanceBox";
 
