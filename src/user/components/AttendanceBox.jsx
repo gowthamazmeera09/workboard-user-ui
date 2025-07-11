@@ -4,7 +4,6 @@ const AttendanceBox = ({ userId }) => {
   const [attendance, setAttendance] = useState([]);
   const [hasMarkedToday, setHasMarkedToday] = useState(false);
   const [isPaymentActive, setIsPaymentActive] = useState(false);
-  const [lastWorkingDays, setLastWorkingDays] = useState(0);
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem(`attendance_${userId}`)) || [];
@@ -20,12 +19,6 @@ const AttendanceBox = ({ userId }) => {
       setIsPaymentActive(isValid);
     }
   }, [userId]);
-
-  useEffect(() => {
-    if (!isPaymentActive) {
-      setLastWorkingDays(attendance.length);
-    }
-  }, [isPaymentActive, attendance]);
 
   const markAttendance = () => {
     const today = new Date().toISOString().split("T")[0];
@@ -71,9 +64,6 @@ const AttendanceBox = ({ userId }) => {
           >
             Pay ₹99 to Renew Access
           </button>
-          <p className="text-gray-700 font-medium mb-4">
-            Last Working Days: {lastWorkingDays}
-          </p>
         </>
       )}
 
