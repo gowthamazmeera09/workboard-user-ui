@@ -56,16 +56,15 @@ const UsersList = () => {
     setSelectedImage(null);
   };
 
-  const handlePayment = (userId, isMonthly = false) => {
+  const handlePayment = (userId) => {
     const razorpay = new window.Razorpay({
       key: "rzp_live_OqzosWrCVboRcu",
-      amount: isMonthly ? 10000 : 100,
+      amount: 10000,
       currency: "INR",
       name: "WorkBoard",
-      description: isMonthly ? "Monthly worker contact access" : "Daily contact access",
+      description: "Monthly worker contact access",
       handler: function () {
-        const key = isMonthly ? `monthly_paid_${userId}` : `paid_${userId}`;
-        localStorage.setItem(key, Date.now());
+        localStorage.setItem(`monthly_paid_${userId}`, Date.now());
         window.location.reload();
       },
       prefill: {
@@ -77,11 +76,10 @@ const UsersList = () => {
     razorpay.open();
   };
 
-  const isPaymentValid = (userId, isMonthly = false) => {
-    const key = isMonthly ? `monthly_paid_${userId}` : `paid_${userId}`;
-    const paymentTime = localStorage.getItem(key);
+  const isPaymentValid = (userId) => {
+    const paymentTime = localStorage.getItem(`monthly_paid_${userId}`);
     if (!paymentTime) return false;
-    const duration = isMonthly ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
+    const duration = 30 * 24 * 60 * 60 * 1000;
     return Date.now() - paymentTime < duration;
   };
 
@@ -106,7 +104,7 @@ const UsersList = () => {
                   <h3 className="text-lg font-bold text-white">{user.username}</h3>
                   <p className="text-sm text-white">📍 {user.distance.toFixed(2)} km away</p>
 
-                  {isPaymentValid(user._id, true) ? (
+                  {isPaymentValid(user._id) ? (
                     <>
                       <div className="flex items-center space-x-2 text-white mt-2">
                         <a href={`tel:${user.phonenumber}`} className="flex items-center space-x-1 cursor-pointer">
@@ -122,21 +120,12 @@ const UsersList = () => {
                       <AttendanceBox userId={user._id} />
                     </>
                   ) : (
-                    <>
-                      <button
-                        onClick={() => handlePayment(user._id, true)}
-                        className="bg-yellow-500 text-black px-4 py-2 mt-2 rounded-md shadow-lg"
-                      >
-                        Pay ₹100 to Unlock Monthly Contact
-                      </button>
-                      <br />
-                      <button
-                        onClick={() => handlePayment(user._id, false)}
-                        className="bg-yellow-400 text-black px-4 py-2 mt-2 rounded-md shadow-lg"
-                      >
-                        Pay ₹1 for 1-Day Contact
-                      </button>
-                    </>
+                    <button
+                      onClick={() => handlePayment(user._id)}
+                      className="bg-yellow-500 text-black px-4 py-2 mt-2 rounded-md shadow-lg"
+                    >
+                      Pay ₹100 to Unlock Monthly Contact
+                    </button>
                   )}
                 </div>
               </div>
