@@ -4,6 +4,7 @@ const AttendanceBox = ({ userId }) => {
   const [attendance, setAttendance] = useState([]);
   const [hasMarkedToday, setHasMarkedToday] = useState(false);
   const [isPaymentActive, setIsPaymentActive] = useState(false);
+  const [lastWorkingDays, setLastWorkingDays] = useState(0);
 
   useEffect(() => {
     const stored = JSON.parse(localStorage.getItem(`attendance_${userId}`)) || [];
@@ -19,6 +20,12 @@ const AttendanceBox = ({ userId }) => {
       setIsPaymentActive(isValid);
     }
   }, [userId]);
+
+  useEffect(() => {
+    if (!isPaymentActive) {
+      setLastWorkingDays(attendance.length);
+    }
+  }, [isPaymentActive, attendance]);
 
   const markAttendance = () => {
     const today = new Date().toISOString().split("T")[0];
@@ -44,9 +51,14 @@ const AttendanceBox = ({ userId }) => {
           </button>
         )
       ) : (
-        <p className="text-yellow-600 font-semibold mb-2">
-          Your monthly access expired. Please pay again to mark attendance.
-        </p>
+        <>
+          <p className="text-yellow-600 font-semibold mb-2">
+            Your monthly access expired. Please pay again to mark attendance.
+          </p>
+          <p className="text-gray-700 font-medium mb-2">
+            Last Working Days: {lastWorkingDays}
+          </p>
+        </>
       )}
 
       <div className="mt-3">
