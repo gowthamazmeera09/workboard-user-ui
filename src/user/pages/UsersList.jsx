@@ -15,6 +15,8 @@ const UsersList = () => {
   const [error, setError] = useState(null);
   const radius = 15;
 
+  const monthlyRoles = ["watchman", "driver", "teacher", "kidscaretaker", "oldpeoplecaretaker"];
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
@@ -57,14 +59,18 @@ const UsersList = () => {
   };
 
   const handlePayment = (userId) => {
+    const isMonthly = monthlyRoles.includes(role);
+    const amount = isMonthly ? 10000 : 100;
+    const paymentKey = isMonthly ? `monthly_paid_${userId}` : `paid_${userId}`;
+
     const razorpay = new window.Razorpay({
       key: "rzp_live_OqzosWrCVboRcu",
-      amount: 10000,
+      amount: amount,
       currency: "INR",
       name: "WorkBoard",
-      description: "Monthly worker contact access",
+      description: isMonthly ? "Monthly worker contact access" : "Worker contact access for 1 day",
       handler: function () {
-        localStorage.setItem(`monthly_paid_${userId}`, Date.now());
+        localStorage.setItem(paymentKey, Date.now());
         window.location.reload();
       },
       prefill: {
@@ -77,9 +83,11 @@ const UsersList = () => {
   };
 
   const isPaymentValid = (userId) => {
-    const paymentTime = localStorage.getItem(`monthly_paid_${userId}`);
+    const isMonthly = monthlyRoles.includes(role);
+    const paymentKey = isMonthly ? `monthly_paid_${userId}` : `paid_${userId}`;
+    const paymentTime = localStorage.getItem(paymentKey);
     if (!paymentTime) return false;
-    const duration = 30 * 24 * 60 * 60 * 1000;
+    const duration = isMonthly ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000;
     return Date.now() - paymentTime < duration;
   };
 
@@ -117,14 +125,16 @@ const UsersList = () => {
                           <FaWhatsapp /> <span>WhatsApp</span>
                         </a>
                       </div>
-                      <AttendanceBox userId={user._id} />
+                      {monthlyRoles.includes(role) && <AttendanceBox userId={user._id} />}
                     </>
                   ) : (
                     <button
                       onClick={() => handlePayment(user._id)}
                       className="bg-yellow-500 text-black px-4 py-2 mt-2 rounded-md shadow-lg"
                     >
-                      Pay ₹100 to Unlock Monthly Contact
+                      {monthlyRoles.includes(role)
+                        ? "Pay ₹100 to Unlock Monthly Contact"
+                        : "Pay ₹1 to Unlock Contact"}
                     </button>
                   )}
                 </div>
