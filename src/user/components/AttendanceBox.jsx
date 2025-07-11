@@ -31,11 +31,11 @@ const AttendanceBox = ({ userId }) => {
   const handleMonthlyPayment = () => {
     const razorpay = new window.Razorpay({
       key: "rzp_live_OqzosWrCVboRcu",
-      amount: 9900, // ₹99 in paise
+      amount: 9900,
       currency: "INR",
       name: "WorkBoard",
       description: "Monthly Access for Attendance",
-      handler: function (response) {
+      handler: function () {
         localStorage.setItem(`monthly_paid_${userId}`, Date.now());
         window.location.reload();
       },
@@ -56,11 +56,11 @@ const AttendanceBox = ({ userId }) => {
       {!isPaymentActive && (
         <>
           <p className="text-yellow-600 font-semibold mb-2">
-            Your monthly access expired. Please pay ₹99 again to mark attendance.
+            Your monthly access has expired. Please pay ₹99 to renew attendance access.
           </p>
           <button
             onClick={handleMonthlyPayment}
-            className="bg-yellow-500 text-black px-4 py-2 rounded shadow hover:bg-yellow-600 mb-2"
+            className="bg-yellow-500 text-black px-4 py-2 rounded shadow hover:bg-yellow-600 mb-4"
           >
             Pay ₹99 to Renew Access
           </button>
@@ -78,14 +78,18 @@ const AttendanceBox = ({ userId }) => {
             Mark Attendance
           </button>
         )
-      ) : null}
+      ) : (
+        <p className="text-gray-600 italic mb-2">You can't mark attendance until payment is renewed.</p>
+      )}
 
       <div className="mt-3">
-        <p className="font-semibold text-gray-700">Marked Days:</p>
+        <p className="font-semibold text-gray-700">Previous Working Days:</p>
         <ul className="list-disc ml-5 text-sm text-gray-600">
-          {attendance.map((date, idx) => (
-            <li key={idx}>{date}</li>
-          ))}
+          {attendance.length === 0 ? (
+            <li>No days marked yet.</li>
+          ) : (
+            attendance.map((date, idx) => <li key={idx}>{date}</li>)
+          )}
         </ul>
       </div>
     </div>
