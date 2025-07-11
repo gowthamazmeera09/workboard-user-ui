@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { haversineDistance } from "../utils/Utils";
 import { FaPhone, FaEnvelope, FaWhatsapp } from "react-icons/fa";
 import AttendanceBox from "../../components/AttendanceBox";
-import PreviousAttendanceInfo from "../../components/PreviousAttendanceInfo";
 
 const API_URL = "https://workboard-backend.onrender.com/user/all-users";
 
@@ -166,8 +165,7 @@ const UsersList = () => {
                   </div>
                 ))}
 
-              {/* Previous Attendance Display */}
-              <PreviousAttendanceInfo userId={user._id} />
+              
               {/* Attendance Marking Box */}
               <AttendanceBox userId={user._id} />
             </div>
