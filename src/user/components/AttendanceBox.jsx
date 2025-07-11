@@ -59,14 +59,16 @@ const AttendanceBox = ({ userId }) => {
     <div className="bg-white p-4 mt-4 rounded-md shadow-md">
       <h3 className="text-lg font-bold mb-2">Attendance</h3>
 
-      {/* If expired: show only working days count */}
-      {paymentExpired && (
+      {/* Total Working Days - Always Show */}
+      <p className="font-semibold text-gray-800 mb-2">
+        Total Working Days: <span className="text-indigo-600">{attendance.length}</span>
+      </p>
+
+      {/* If expired, show renew message and no mark button */}
+      {paymentExpired ? (
         <>
           <p className="text-yellow-600 font-semibold mb-2">
             Your monthly access has expired.
-          </p>
-          <p className="text-gray-700 font-medium mb-2">
-            Last Month's Working Days: <span className="text-indigo-600">{attendance.length}</span>
           </p>
           <button
             onClick={handleMonthlyPayment}
@@ -75,10 +77,7 @@ const AttendanceBox = ({ userId }) => {
             Pay ₹99 to Renew Access
           </button>
         </>
-      )}
-
-      {/* If valid: mark attendance and show date list */}
-      {isPaymentActive && (
+      ) : (
         <>
           {hasMarkedToday ? (
             <p className="text-green-600 mb-2">Today's attendance is already marked.</p>
@@ -91,16 +90,12 @@ const AttendanceBox = ({ userId }) => {
             </button>
           )}
 
-          <div className="mt-4">
-            <p className="font-semibold text-gray-800 mb-1">
-              Total Working Days: <span className="text-indigo-600">{attendance.length}</span>
-            </p>
-            <ul className="list-disc ml-5 text-sm text-gray-600">
-              {attendance.map((date, idx) => (
-                <li key={idx}>{date}</li>
-              ))}
-            </ul>
-          </div>
+          {/* Optional: full list only if active */}
+          <ul className="list-disc ml-5 text-sm text-gray-600 mt-2">
+            {attendance.map((date, idx) => (
+              <li key={idx}>{date}</li>
+            ))}
+          </ul>
         </>
       )}
     </div>
